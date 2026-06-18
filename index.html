@@ -13,10 +13,10 @@
         }
 
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #6c3fbf 0%, #9d5ce8 50%, #d4a5f5 100%);
             min-height: 100vh;
             padding: 20px;
-            color: #2c3e50;
+            color: #2c2c2c;
         }
 
         .container {
@@ -26,15 +26,17 @@
 
         header {
             text-align: center;
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             padding: 30px;
             border-radius: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 32px rgba(108, 63, 191, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         h1 {
-            color: #1e3a8a;
+            color: #6c3fbf;
             font-size: 2.5rem;
             margin-bottom: 10px;
         }
@@ -44,6 +46,7 @@
             margin: 10px 0;
             display: inline-block;
             animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(108, 63, 191, 0.3));
         }
 
         @keyframes float {
@@ -52,15 +55,17 @@
         }
 
         .card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             padding: 30px;
             border-radius: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 32px rgba(108, 63, 191, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .button {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: linear-gradient(135deg, #6c3fbf 0%, #9d5ce8 100%);
             color: white;
             border: none;
             padding: 15px 30px;
@@ -73,19 +78,19 @@
 
         .button:hover {
             transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+            box-shadow: 0 5px 15px rgba(108, 63, 191, 0.4);
         }
 
         .button-outline {
             background: white;
-            color: #2c3e50;
-            border: 2px solid #2c3e50;
+            color: #6c3fbf;
+            border: 2px solid #6c3fbf;
         }
 
         .button-level {
-            background: #f0f4ff;
-            color: #2c3e50;
-            border: 2px solid #bdc3c7;
+            background: rgba(255, 255, 255, 0.8);
+            color: #6c3fbf;
+            border: 2px solid rgba(108, 63, 191, 0.3);
             padding: 12px 20px;
             font-size: 1rem;
             width: 100%;
@@ -94,9 +99,9 @@
         }
 
         .button-level.active {
-            background: #34495e;
+            background: #6c3fbf;
             color: white;
-            border-color: #2c3e50;
+            border-color: #6c3fbf;
         }
 
         .grid {
@@ -117,9 +122,9 @@
         }
 
         .topic-tile:hover {
-            background: #34495e;
+            background: #6c3fbf;
             color: white;
-            border-color: #34495e;
+            border-color: #6c3fbf;
         }
 
         .quiz-choice {
@@ -136,9 +141,9 @@
 
         .quiz-choice:hover,
         .quiz-choice.selected {
-            background: #34495e;
+            background: #6c3fbf;
             color: white;
-            border-color: #34495e;
+            border-color: #6c3fbf;
         }
 
         .quiz-choice input {
@@ -147,11 +152,11 @@
         }
 
         .prompt-item {
-            background: #f9fafb;
+            background: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 15px;
-            border-left: 5px solid #34495e;
+            border-left: 5px solid #6c3fbf;
             cursor: pointer;
             transition: 0.2s;
         }
@@ -189,15 +194,15 @@
         }
 
         .content-box {
-            background: #ecf0f1;
+            background: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 15px;
-            border-left: 5px solid #34495e;
+            border-left: 5px solid #6c3fbf;
         }
 
         .content-box h3 {
-            color: #1e3a8a;
+            color: #6c3fbf;
             margin-bottom: 10px;
         }
 
@@ -214,7 +219,7 @@
 
         textarea:focus {
             outline: none;
-            border-color: #34495e;
+            border-color: #6c3fbf;
         }
 
         .word-counter {
@@ -233,7 +238,7 @@
         }
 
         .score-display {
-            background: linear-gradient(135deg, #2c3e50, #34495e);
+            background: linear-gradient(135deg, #6c3fbf, #9d5ce8);
             color: white;
             padding: 20px;
             border-radius: 15px;
@@ -254,21 +259,21 @@
         }
 
         .metric-box {
-            background: #f9fafb;
+            background: rgba(255, 255, 255, 0.8);
             padding: 15px;
             border-radius: 10px;
-            border-left: 4px solid #34495e;
+            border-left: 4px solid #6c3fbf;
         }
 
         .metric-box h4 {
-            color: #1e3a8a;
+            color: #6c3fbf;
             margin-bottom: 5px;
         }
 
         .metric-score {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #34495e;
+            color: #6c3fbf;
         }
 
         .suggestions-list {
