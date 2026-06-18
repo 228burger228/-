@@ -13,7 +13,7 @@
         }
 
         body {
-            background: #e8e8e8;
+            background: #9370DB;
             min-height: 100vh;
             padding: 20px;
             color: #2c2c2c;
@@ -423,8 +423,8 @@
                     }
                 ],
                 backgroundContent: [
-                    "Modern medicine relies on advanced technology, clinical trials, and pharmaceuticals. It offers rapid treatment and precise diagnostics. However, it often treats symptoms rather than root causes and can be expensive. Traditional medicine emphasizes prevention and holistic treatment through natural remedies. It acts slowly but has fewer side effects. Both approaches have merit depending on the condition.",
-                    "Integrating both systems provides optimal patient care. Modern medicine handles emergencies and complex conditions, while traditional medicine excels in chronic pain management and preventive care. A balanced approach consulting both practitioners ensures safe, effective treatment."
+                    "Modern medicine relies on advanced technology, clinical trials, and pharmaceuticals. It offers rapid treatment and precise diagnostics. Yet it often treats symptoms rather than root causes and carries high costs. Traditional medicine emphasizes prevention and holistic care using natural remedies. It works slowly but has fewer side effects. Each has distinct advantages depending on the condition.",
+                    "Combining both systems creates better patient outcomes. Modern medicine handles emergencies and complex situations well, while traditional medicine shines in chronic pain and preventive care. Consulting practitioners from both fields ensures safe, balanced treatment."
                 ],
                 keyPhrases: [
                     { en: "relies on advanced technology", ru: "опирается на передовые технологии" },
@@ -527,8 +527,8 @@
                     }
                 ],
                 backgroundContent: [
-                    "Technology revolutionized communication and information access. Social media connects people across continents instantly. Remote work increases flexibility and opportunity. However, screen addiction reduces meaningful face-to-face interaction. Mental health issues, sleep problems, and social anxiety increase with technology overuse. Balance is essential for healthy development.",
-                    "Smart technology adoption requires conscious boundaries. Digital literacy education teaches responsible use. Families benefit from screen-free times and outdoor activities. Workplaces should enforce reasonable hours despite remote capabilities. Technology serves humanity best when people maintain human connections and physical health alongside digital engagement."
+                    "Technology changed how we communicate and share information. Social media lets people connect across the world instantly. Remote work offers more flexibility. Yet excessive screen time damages face-to-face relationships. Depression, insomnia, and social anxiety rise with overuse. Finding a healthy balance matters.",
+                    "Smart tech use requires setting limits. Schools need digital literacy programs. Families should have tech-free times and outdoor activities. Companies must respect work boundaries. Technology works best when it supports real relationships and personal health."
                 ],
                 keyPhrases: [
                     { en: "digital transformation", ru: "цифровая трансформация" },
@@ -888,7 +888,7 @@
             const sentences = essay.split(/[.!?]+/).filter(s => s.trim().length > 0);
             const paragraphs = essay.split('\n\n').filter(p => p.trim().length > 0);
             
-            const cohesiveMarkers = ['however', 'therefore', 'furthermore', 'moreover', 'additionally', 'consequently', 'in conclusion', 'on the other hand'];
+            const cohesiveMarkers = ['yet', 'thus', 'still', 'also', 'next', 'finally', 'overall', 'meanwhile', 'eventually', 'instead', 'similarly', 'likewise'];
             let markerCount = 0;
             cohesiveMarkers.forEach(marker => {
                 const regex = new RegExp(`\\b${marker}\\b`, 'gi');
@@ -980,20 +980,20 @@
             const suggestions = [];
             
             if (taskResponse.coherence < 7) {
-                suggestions.push("Use transition words like 'however', 'therefore', 'moreover' to connect your ideas better.");
+                suggestions.push("Link your paragraphs better. Use connecting words like 'yet', 'as a result', 'in contrast' between ideas.");
             }
             if (taskResponse.lexical < 7) {
-                suggestions.push("Expand your vocabulary. Try synonyms and more sophisticated expressions.");
+                suggestions.push("Use more varied words. Replace common terms with precise alternatives.");
             }
             if (taskResponse.grammar < 7) {
-                suggestions.push("Review your article usage (a/an/the) and subject-verb agreement.");
+                suggestions.push("Check articles (a/an/the) and make sure verbs match their subjects.");
             }
             if (taskResponse.taskCompletion < 7) {
-                suggestions.push("Ensure you fully address all parts of the question with relevant examples.");
+                suggestions.push("Answer all parts of the prompt with concrete examples.");
             }
             
             if (suggestions.length === 0) {
-                suggestions.push("Excellent work! Continue practicing to maintain consistency.");
+                suggestions.push("Great work! Keep writing to build consistency.");
             }
             
             return suggestions;
