@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Writing Coach</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #1e3a8a;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            font-size: 80px;
+            margin: 10px 0;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .button {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 5px;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .button-outline {
+            background: white;
+            color: #764ba2;
+            border: 2px solid #764ba2;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .topic-tile {
+            padding: 20px;
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .topic-tile:hover {
+            background: #8b5cf6;
+            color: white;
+            border-color: #8b5cf6;
+        }
+
+        .quiz-choice {
+            padding: 15px;
+            margin: 10px 0;
+            background: #f0f4ff;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .quiz-choice:hover,
+        .quiz-choice.selected {
+            background: #8b5cf6;
+            color: white;
+            border-color: #8b5cf6;
+        }
+
+        .quiz-choice input {
+            margin-right: 15px;
+            transform: scale(1.2);
+        }
+
+        .prompt-item {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 5px solid #8b5cf6;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .prompt-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .badge-discussion { background: #10b981; }
+        .badge-advantages { background: #f59e0b; }
+        .badge-problem { background: #ef4444; }
+        .badge-agree { background: #8b5cf6; }
+        .badge-report { background: #3b82f6; }
+
+        .visualization {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            height: 150px;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .bar {
+            flex: 1;
+            background: linear-gradient(to top, #667eea, #8b5cf6);
+            border-radius: 5px 5px 0 0;
+            position: relative;
+        }
+
+        .bar span {
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .line-graph {
+            position: relative;
+            height: 180px;
+            margin: 15px 0;
+            padding: 10px;
+            border-left: 2px solid #333;
+            border-bottom: 2px solid #333;
+        }
+
+        .line-graph svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .pie-chart {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 15px auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .data-table th {
+            background: #667eea;
+            color: white;
+        }
+
+        .data-table tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .map-visual {
+            background: #e5f3ff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .map-item {
+            display: inline-block;
+            padding: 10px 15px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            margin: 5px;
+            font-size: 0.9rem;
+        }
+
+        .content-box {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 5px solid #8b5cf6;
+        }
+
+        .content-box h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 250px;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        .word-counter {
+            text-align: right;
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .results-section {
+            display: none;
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .score-number {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .metric-box {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .metric-box h4 {
+            color: #1e3a8a;
+            margin-bottom: 5px;
+        }
+
+        .metric-score {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b5cf6;
+        }
+
+        .phrases-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+
+        .phrases-table th {
+            background: #667eea;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .phrases-table td {
+            padding: 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .phrases-table tr:hover {
+            background: #f0f4ff;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .back-button {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="assessmentScreen">
+            <header>
+                <div class="logo">🦋</div>
+                <h1>IELTS Writing Coach</h1>
+                <p>Let's identify your strengths and areas to focus on. Takes 30 seconds.</p>
+            </header>
+            <div class="card">
+                <h2 style="margin-bottom: 20px;">Quick Assessment</h2>
+                <div id="quizContainer">
+                    <h3 id="questionTitle">Question 1/2: What are your main writing challenges?</h3>
+                    <div id="optionsContainer"></div>
+                    <p style="color: #ef4444; font-size: 0.9rem; margin-top: 10px;">* Select at least 3 areas</p>
+                    <button class="button" onclick="proceedToNextQuestion()" style="width: 100%; margin-top: 20px;">Continue</button>
+                </div>
+                <div id="assessmentResult" class="hidden" style="text-align: center;">
+                    <h3>✅ Assessment Complete</h3>
+                    <p id="resultMessage" style="margin: 15px 0; font-size: 1.1rem;"></p>
+                    <button class="button" onclick="enterMainMenu()">Begin Training →</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mainMenu" class="hidden">
+            <header>
+                <div class="logo">🦋</div>
+                <h1>IELTS Writing Coach</h1>
+                <p>Master IELTS writing through targeted practice and feedback.</p>
+            </header>
+            <div class="card" style="text-align: center;">
+                <h2 style="margin-bottom: 20px;">Select Task Type</h2>
+                <button class="button" onclick="selectTaskType(1)">Task 1 (Academic)</button>
+                <button class="button" onclick="selectTaskType(2)">Task 2 (Essay)</button>
+                <br><br>
+                <button class="button button-outline" onclick="openProgressTracker()">📊 Progress Tracker</button>
+            </div>
+        </div>
+
+        <div id="topicsScreen" class="hidden">
+            <button class="back-button" onclick="returnToMenu()">← Back</button>
+            <div class="card">
+                <h2>Select Topic Area</h2>
+                <div class="grid" id="topicsContainer"></div>
+            </div>
+        </div>
+
+        <div id="promptsScreen" class="hidden">
+            <button class="back-button" onclick="backToTopics()">← Back to Topics</button>
+            <div class="card">
+                <h2 id="topicTitle">Topic Prompts</h2>
+                <p style="color: #6b7280; margin-bottom: 20px;">Choose a writing prompt to practice.</p>
+                <div id="promptsContainer"></div>
+            </div>
+        </div>
+
+        <div id="writingScreen" class="hidden">
+            <button class="back-button" onclick="backToPrompts()">← Back to Prompts</button>
+            <div class="card" id="preparationContent"></div>
+            <div class="card">
+                <h2>Writing Practice</h2>
+                <div style="background: #fef3c7; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-size: 0.95rem;">
+                    <strong>📝 Your Prompt:</strong> <span id="promptDisplay"></span>
+                </div>
+                <textarea id="essayField" placeholder="Write your essay here..." oninput="updateWordCount()"></textarea>
+                <div class="word-counter">Words: <span id="currentWordCount">0</span> / <span id="minimumWords">150</span></div>
+                <button class="button" style="width: 100%;" onclick="evaluateEssay()">⚡ Submit & Get Feedback</button>
+            </div>
+            <div class="card results-section" id="feedbackSection">
+                <div class="score-display">
+                    <div>Your Band Score</div>
+                    <div class="score-number" id="bandScore">0.0</div>
+                </div>
+                <div class="metrics-grid" id="metricsContainer"></div>
+            </div>
+        </div>
+
+        <div id="progressScreen" class="hidden">
+            <button class="back-button" onclick="returnToMenu()">← Back</button>
+            <div class="card">
+                <h2>📊 Your Progress</h2>
+                <p style="margin-bottom: 15px;">Areas to focus on from your recent writing:</p>
+                <div id="progressList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const topicLibrary = {
+            medicine: {
+                name: "💊 Modern vs Traditional Medicine",
+                taskType: 2,
+                prompts: [
+                    {
+                        type: "Discussion",
+                        text: "Some people prefer modern medicine, while others prefer traditional medicine. Discuss both views and give your opinion."
+                    },
+                    {
+                        type: "Advantages",
+                        text: "Modern medicine has many advantages, but traditional medicine is also important. What are the advantages and disadvantages of both?"
+                    }
+                ],
+                backgroundContent: [
+                    "Modern medicine relies heavily on advanced technology, rigorous clinical trials, and pharmaceutical drugs to treat various diseases. It offers rapid results, precise diagnostics, and life-saving surgeries. However, it often focuses on symptoms rather than root causes and can be prohibitively expensive. In contrast, traditional medicine uses natural herbs, acupuncture, and holistic approaches passed down through generations. It emphasizes prevention, mental balance, and treating the whole body, but it often lacks rigorous scientific validation and acts much slower. Both systems have unique strengths and weaknesses, making the choice highly dependent on the specific medical condition.",
+                    "Integrating both medical systems can provide the best comprehensive patient care. While modern medicine is indispensable for handling acute emergencies, complex surgeries, and severe infectious diseases, traditional medicine excels in managing chronic pain, reducing daily stress, and improving overall lifestyle. Patients should always consult qualified professionals from both fields to ensure safe, balanced, and effective treatment plans."
+                ],
+                keyPhrases: [
+                    { en: "relies heavily on advanced technology", ru: "опирается на передовые технологии" },
+                    { en: "offers rapid results", ru: "предлагает быстрые результаты" },
+                    { en: "life-saving surgeries", ru: "спасающие жизнь операции" },
+                    { en: "focuses on symptoms", ru: "фокусируется на симптомах" },
+                    { en: "prohibitively expensive", ru: "непомерно дорого" },
+                    { en: "natural herbs and holistic approaches", ru: "натуральные травы и целостные подходы" },
+                    { en: "emphasizes prevention", ru: "делает упор на профилактику" },
+                    { en: "lacks scientific validation", ru: "не имеет научного обоснования" },
+                    { en: "acute emergencies", ru: "острые неотложные состояния" },
+                    { en: "chronic pain management", ru: "лечение хронической боли" },
+                    { en: "comprehensive patient care", ru: "комплексный уход за пациентом" }
+                ]
+            },
+            environment: {
+                name: "🌍 Environment & Sustainability",
+                taskType: 2,
+                prompts: [
+                    {
+                        type: "Discussion",
+                        text: "Some people think that environmental problems are too big for individuals to solve. Others believe that individuals can make a difference. Discuss both views and give your opinion."
+                    },
+                    {
+                        type: "Problem",
+                        text: "Global warming is one of the biggest threats humans face. What are the causes of this phenomenon and what solutions can be implemented?"
+                    }
+                ],
+                backgroundContent: [
+                    "Environmental degradation has become one of the most pressing issues of the 21st century. Climate change, driven by greenhouse gas emissions and deforestation, poses a significant threat to global ecosystems. Rising temperatures lead to melting ice caps, extreme weather events, and rising sea levels. Furthermore, pollution from industrial activities and plastic waste contaminates our oceans and air. While governments and large corporations bear the primary responsibility for implementing large-scale reforms, individual actions also play a crucial role.",
+                    "To effectively combat these environmental challenges, a multi-faceted approach is required. Governments must enforce stricter regulations on carbon emissions and invest heavily in renewable energy sources like solar and wind power. Simultaneously, educational campaigns should raise public awareness about sustainable living. Individuals can contribute by adopting a circular economy mindset, minimizing single-use plastics, and supporting eco-friendly businesses."
+                ],
+                keyPhrases: [
+                    { en: "environmental degradation", ru: "ухудшение окружающей среды" },
+                    { en: "greenhouse gas emissions", ru: "выбросы парниковых газов" },
+                    { en: "poses a significant threat", ru: "представляет значительную угрозу" },
+                    { en: "extreme weather events", ru: "экстремальные погодные явления" },
+                    { en: "bear the primary responsibility", ru: "нести основную ответственность" },
+                    { en: "large-scale reforms", ru: "масштабные реформы" },
+                    { en: "mitigating environmental damage", ru: "смягчение ущерба окружающей среде" },
+                    { en: "multi-faceted approach", ru: "многогранный подход" },
+                    { en: "renewable energy sources", ru: "возобновляемые источники энергии" },
+                    { en: "sustainable living", ru: "устойчивый образ жизни" }
+                ]
+            },
+            crime: {
+                name: "⚖️ Law & Crime",
+                taskType: 2,
+                prompts: [
+                    {
+                        type: "Discussion",
+                        text: "Some people believe that the best way to reduce crime is to give longer prison sentences. Others believe there are better alternative ways. Discuss both views and give your opinion."
+                    },
+                    {
+                        type: "Problem",
+                        text: "In many cities, the crime rate is increasing. What do you think are the main causes of this problem and what measures can be taken to solve it?"
+                    }
+                ],
+                backgroundContent: [
+                    "Crime remains a significant challenge in many urban areas worldwide, prompting debates about the most effective ways to maintain law and order. Traditionally, the justice system has relied on punitive measures, such as lengthy prison sentences, to deter criminal behavior. However, many criminologists argue that this approach fails to address the root causes of crime, such as poverty, lack of education, and social inequality. Consequently, prisons often become breeding grounds for further criminal activity rather than centers for rehabilitation.",
+                    "Alternative approaches to crime reduction focus on rehabilitation and social integration. Community service, vocational training, and educational programs within prisons can equip offenders with the skills needed to reintegrate into society successfully. Furthermore, investing in early childhood education and providing support for at-risk youth can prevent criminal behavior before it starts."
+                ],
+                keyPhrases: [
+                    { en: "maintain law and order", ru: "поддерживать закон и порядок" },
+                    { en: "punitive measures", ru: "карательные меры" },
+                    { en: "deter criminal behavior", ru: "сдерживать преступное поведение" },
+                    { en: "root causes of crime", ru: "коренные причины преступности" },
+                    { en: "social inequality", ru: "социальное неравенство" },
+                    { en: "preventive strategies", ru: "превентивные стратегии" },
+                    { en: "social integration", ru: "социальная интеграция" },
+                    { en: "vocational training", ru: "профессиональное обучение" }
+                ]
+            },
+            family: {
+                name: "👨‍👩‍👧 Family & Society",
+                taskType: 2,
+                prompts: [
+                    {
+                        type: "Discussion",
+                        text: "Some people think that parents should teach children how to be good members of society. Others believe that school is the best place to learn this. Discuss both views and give your opinion."
+                    },
+                    {
+                        type: "Agree",
+                        text: "Nowadays, many families spend less time together eating meals. To what extent do you agree or disagree that this is a negative development?"
+                    }
+                ],
+                backgroundContent: [
+                    "The family unit has traditionally been the cornerstone of society, playing a vital role in shaping a child's moral compass and social skills. Parents are the first educators a child encounters, and the values instilled at home often dictate future behavior. Through daily interactions, children learn empathy, respect, and responsibility. However, in today's fast-paced world, both parents often work long hours, leaving less time for family bonding.",
+                    "Ultimately, the responsibility of raising good citizens should be a collaborative effort between home and school. While parents lay the foundational moral groundwork, schools reinforce these values through formal education and social activities. A strong partnership between parents and teachers ensures that children receive consistent messaging about right and wrong."
+                ],
+                keyPhrases: [
+                    { en: "family unit", ru: "ячейка общества" },
+                    { en: "cornerstone of society", ru: "краеугольный камень общества" },
+                    { en: "moral compass", ru: "моральный компас" },
+                    { en: "values instilled at home", ru: "ценности, привитые дома" },
+                    { en: "fast-paced world", ru: "быстро меняющийся мир" },
+                    { en: "collaborative effort", ru: "совместные усилия" },
+                    { en: "well-rounded individuals", ru: "всесторонне развитые личности" }
+                ]
+            },
+            chartBar: {
+                name: "📊 Bar Chart",
+                taskType: 1,
+                prompts: [
+                    {
+                        type: "Report",
+                        text: "The bar chart shows the percentage of people using different modes of transport in London between 1990 and 2010. Summarize the information by selecting and reporting the main features."
+                    }
+                ],
+                visualType: "bar",
+                backgroundContent: [
+                    "The bar chart illustrates transportation usage in London over a 20-year period from 1990 to 2010. Overall, car usage remained the most popular mode of transport throughout the period, despite some fluctuations. In 1990, 45% of commuters used cars, which increased to 52% in 2000 before dropping slightly to 48% in 2010. Bus usage showed a different pattern, starting at 30% in 1990, declining to 25% in 2000, and recovering slightly to 28% by 2010. Train usage demonstrated steady growth, rising from 15% to 20% over the two decades."
+                ],
+                keyPhrases: [
+                    { en: "illustrates transportation usage", ru: "иллюстрирует использование транспорта" },
+                    { en: "over a 20-year period", ru: "за 20-летний период" },
+                    { en: "remained the most popular", ru: "остался самым популярным" },
+                    { en: "despite some fluctuations", ru: "несмотря на колебания" },
+                    { en: "increased to", ru: "увеличилось до" },
+                    { en: "demonstrated steady growth", ru: "продемонстрировал устойчивый рост" },
+                    { en: "throughout the period", ru: "на протяжении периода" }
+                ]
+            },
+            chartLine: {
+                name: "📈 Line Graph",
+                taskType: 1,
+                prompts: [
+                    {
+                        type: "Report",
+                        text: "The line graph shows the number of tourists visiting three European countries (France, Spain, Italy) from 2010 to 2020. Summarize the information."
+                    }
+                ],
+                visualType: "line",
+                backgroundContent: [
+                    "The line graph depicts tourist arrivals in three European countries over a decade from 2010 to 2020. Overall, all three countries experienced steady growth in tourism until 2018, followed by a sharp decline in 2020, likely due to the global pandemic. France consistently attracted the highest number of tourists, starting at 80 million in 2010 and peaking at 92 million in 2018, before plummeting to 60 million in 2020."
+                ],
+                keyPhrases: [
+                    { en: "depicts tourist arrivals", ru: "изображает прибытие туристов" },
+                    { en: "over a decade", ru: "за десятилетие" },
+                    { en: "experienced steady growth", ru: "испытал устойчивый рост" },
+                    { en: "followed by a sharp decline", ru: "за которым последовало резкое падение" },
+                    { en: "consistently attracted", ru: "постоянно привлекал" },
+                    { en: "peaking at", ru: "достигая пика в" }
+                ]
+            },
+            chartPie: {
+                name: "🥧 Pie Chart",
+                taskType: 1,
+                prompts: [
+                    {
+                        type: "Report",
+                        text: "The pie charts show the proportion of energy production from different sources (Coal, Natural Gas, Nuclear, Renewables) in a country in 2000 and 2020. Summarize the information."
+                    }
+                ],
+                visualType: "pie",
+                backgroundContent: [
+                    "The pie charts compare the sources of energy production in a particular country between 2000 and 2020. Overall, there was a significant shift towards renewable energy sources over the 20-year period, while coal usage declined substantially. In 2000, coal dominated energy production at 40%, followed by natural gas at 30%, nuclear power at 20%, and renewables at only 10%. By 2020, the proportion of coal had fallen to 25%, while renewable energy had increased dramatically to 25%."
+                ],
+                keyPhrases: [
+                    { en: "compare the sources of energy production", ru: "сравнивают источники производства энергии" },
+                    { en: "significant shift towards", ru: "значительный сдвиг в сторону" },
+                    { en: "declined substantially", ru: "существенно снизился" },
+                    { en: "dominated energy production", ru: "доминировал в производстве энергии" },
+                    { en: "increased dramatically", ru: "резко увеличилось" }
+                ]
+            },
+            chartTable: {
+                name: "📋 Data Table",
+                taskType: 1,
+                prompts: [
+                    {
+                        type: "Report",
+                        text: "The table shows the average monthly salaries (in USD) in five different professions in three cities (New York, London, Tokyo) in 2023. Summarize the information."
+                    }
+                ],
+                visualType: "table",
+                backgroundContent: [
+                    "The table presents data on average monthly salaries across five professions in three major cities in 2023. Overall, New York offered the highest salaries across all professions, followed by London and then Tokyo. Doctors and lawyers were the highest-paid professionals in all three cities. In New York, lawyers earned the most at $9,000 per month, followed by doctors at $8,500."
+                ],
+                keyPhrases: [
+                    { en: "presents data on average monthly salaries", ru: "представляет данные о среднемесячных зарплатах" },
+                    { en: "offered the highest salaries", ru: "предлагал самые высокие зарплаты" },
+                    { en: "highest-paid professionals", ru: "самые высокооплачиваемые специалисты" },
+                    { en: "respectively", ru: "соответственно" }
+                ]
+            },
+            chartMap: {
+                name: "🗺️ Map Evolution",
+                taskType: 1,
+                prompts: [
+                    {
+                        type: "Report",
