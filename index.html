@@ -82,6 +82,23 @@
             border: 2px solid #764ba2;
         }
 
+        .button-level {
+            background: #f0f4ff;
+            color: #764ba2;
+            border: 2px solid #d8d8ff;
+            padding: 12px 20px;
+            font-size: 1rem;
+            width: 100%;
+            margin: 8px 0;
+            text-align: left;
+        }
+
+        .button-level.active {
+            background: #8b5cf6;
+            color: white;
+            border-color: #8b5cf6;
+        }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -159,6 +176,9 @@
         .badge-problem { background: #ef4444; }
         .badge-agree { background: #8b5cf6; }
         .badge-report { background: #3b82f6; }
+        .badge-foundation { background: #059669; }
+        .badge-intermediate { background: #dc2626; }
+        .badge-advanced { background: #7c3aed; }
 
         .visualization {
             margin: 15px 0;
@@ -166,102 +186,6 @@
             background: #f9fafb;
             border-radius: 8px;
             border: 1px solid #e5e7eb;
-        }
-
-        .bar-chart {
-            display: flex;
-            align-items: flex-end;
-            height: 150px;
-            gap: 10px;
-            margin: 15px 0;
-        }
-
-        .bar {
-            flex: 1;
-            background: linear-gradient(to top, #667eea, #8b5cf6);
-            border-radius: 5px 5px 0 0;
-            position: relative;
-        }
-
-        .bar span {
-            position: absolute;
-            bottom: -25px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 0.75rem;
-            color: #6b7280;
-        }
-
-        .line-graph {
-            position: relative;
-            height: 180px;
-            margin: 15px 0;
-            padding: 10px;
-            border-left: 2px solid #333;
-            border-bottom: 2px solid #333;
-        }
-
-        .line-graph svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .chart-legend {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 10px;
-            font-size: 0.8rem;
-            flex-wrap: wrap;
-        }
-
-        .pie-chart {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            margin: 15px auto;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-            font-size: 0.9rem;
-        }
-
-        .data-table th,
-        .data-table td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .data-table th {
-            background: #667eea;
-            color: white;
-        }
-
-        .data-table tr:nth-child(even) {
-            background: #f9fafb;
-        }
-
-        .map-visual {
-            background: #e5f3ff;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            margin: 15px 0;
-        }
-
-        .map-item {
-            display: inline-block;
-            padding: 10px 15px;
-            background: white;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            margin: 5px;
-            font-size: 0.9rem;
         }
 
         .content-box {
@@ -298,6 +222,10 @@
             color: #6b7280;
             font-size: 0.9rem;
             margin-bottom: 15px;
+        }
+
+        .word-counter.warning {
+            color: #ef4444;
         }
 
         .results-section {
@@ -343,26 +271,17 @@
             color: #8b5cf6;
         }
 
-        .phrases-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 10px 0;
+        .suggestions-list {
+            list-style: none;
+            padding: 0;
         }
 
-        .phrases-table th {
-            background: #667eea;
-            color: white;
+        .suggestions-list li {
             padding: 10px;
-            text-align: left;
-        }
-
-        .phrases-table td {
-            padding: 8px;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .phrases-table tr:hover {
-            background: #f0f4ff;
+            margin: 5px 0;
+            background: #f3f4f6;
+            border-left: 4px solid #fbbf24;
+            border-radius: 4px;
         }
 
         .hidden {
@@ -386,7 +305,7 @@
             <header>
                 <div class="logo">🦋</div>
                 <h1>IELTS Writing Coach</h1>
-                <p>Let's identify your strengths and areas to focus on. Takes 30 seconds.</p>
+                <p>Master IELTS writing with targeted practice and detailed feedback.</p>
             </header>
             <div class="card">
                 <h2 style="margin-bottom: 20px;">Quick Assessment</h2>
@@ -408,10 +327,15 @@
             <header>
                 <div class="logo">🦋</div>
                 <h1>IELTS Writing Coach</h1>
-                <p>Master IELTS writing through targeted practice and feedback.</p>
+                <p>Select your practice level and task type.</p>
             </header>
             <div class="card" style="text-align: center;">
-                <h2 style="margin-bottom: 20px;">Select Task Type</h2>
+                <h2 style="margin-bottom: 20px;">Choose Your Level</h2>
+                <button class="button-level" onclick="selectLevel('foundation')">🌱 Foundation (IELTS 5.0-6.0)</button>
+                <button class="button-level" onclick="selectLevel('intermediate')">📈 Intermediate (IELTS 6.0-7.0)</button>
+                <button class="button-level" onclick="selectLevel('advanced')">⭐ Advanced (IELTS 7.0-8.0)</button>
+                <hr style="margin: 20px 0; border: none; border-top: 1px solid #e5e7eb;">
+                <h2 style="margin: 20px 0;">Select Task Type</h2>
                 <button class="button" onclick="selectTaskType(1)">Task 1 (Academic)</button>
                 <button class="button" onclick="selectTaskType(2)">Task 2 (Essay)</button>
                 <br><br>
@@ -431,7 +355,7 @@
             <button class="back-button" onclick="backToTopics()">← Back to Topics</button>
             <div class="card">
                 <h2 id="topicTitle">Topic Prompts</h2>
-                <p style="color: #6b7280; margin-bottom: 20px;">Choose a writing prompt to practice.</p>
+                <p style="color: #6b7280; margin-bottom: 20px;">Select a prompt to practice.</p>
                 <div id="promptsContainer"></div>
             </div>
         </div>
@@ -445,7 +369,7 @@
                     <strong>📝 Your Prompt:</strong> <span id="promptDisplay"></span>
                 </div>
                 <textarea id="essayField" placeholder="Write your essay here..." oninput="updateWordCount()"></textarea>
-                <div class="word-counter">Words: <span id="currentWordCount">0</span> / <span id="minimumWords">150</span></div>
+                <div class="word-counter" id="wordCounter">Words: <span id="currentWordCount">0</span> / <span id="minimumWords">150</span></div>
                 <button class="button" style="width: 100%;" onclick="evaluateEssay()">⚡ Submit & Get Feedback</button>
             </div>
             <div class="card results-section" id="feedbackSection">
@@ -454,6 +378,7 @@
                     <div class="score-number" id="bandScore">0.0</div>
                 </div>
                 <div class="metrics-grid" id="metricsContainer"></div>
+                <div id="suggestionsContainer"></div>
             </div>
         </div>
 
@@ -461,16 +386,28 @@
             <button class="back-button" onclick="returnToMenu()">← Back</button>
             <div class="card">
                 <h2>📊 Your Progress</h2>
-                <p style="margin-bottom: 15px;">Areas to focus on from your recent writing:</p>
+                <p style="margin-bottom: 15px;">Performance summary:</p>
                 <div id="progressList"></div>
             </div>
         </div>
     </div>
 
     <script>
+        const DIFFICULTY_LEVELS = {
+            foundation: { name: 'Foundation', minWords: 150, maxWords: 200, minBand: 5.0, maxBand: 6.0 },
+            intermediate: { name: 'Intermediate', minWords: 200, maxWords: 250, minBand: 6.0, maxBand: 7.0 },
+            advanced: { name: 'Advanced', minWords: 250, maxWords: 350, minBand: 7.0, maxBand: 8.0 }
+        };
+
+        let currentLevel = 'intermediate';
+        let currentTaskType = null;
+        let currentTopic = null;
+        let currentPrompt = null;
+        let assessmentResponses = [];
+
         const topicLibrary = {
             medicine: {
-                name: "💊 Modern vs Traditional Medicine",
+                name: "💊 Medicine & Healthcare",
                 taskType: 2,
                 prompts: [
                     {
@@ -479,83 +416,72 @@
                     },
                     {
                         type: "Advantages",
-                        text: "Modern medicine has many advantages, but traditional medicine is also important. What are the advantages and disadvantages of both?"
+                        text: "What are the advantages and disadvantages of modern vs traditional medicine?"
                     }
                 ],
                 backgroundContent: [
-                    "Modern medicine relies heavily on advanced technology, rigorous clinical trials, and pharmaceutical drugs to treat various diseases. It offers rapid results, precise diagnostics, and life-saving surgeries. However, it often focuses on symptoms rather than root causes and can be prohibitively expensive. In contrast, traditional medicine uses natural herbs, acupuncture, and holistic approaches passed down through generations. It emphasizes prevention, mental balance, and treating the whole body, but it often lacks rigorous scientific validation and acts much slower. Both systems have unique strengths and weaknesses, making the choice highly dependent on the specific medical condition.",
-                    "Integrating both medical systems can provide the best comprehensive patient care. While modern medicine is indispensable for handling acute emergencies, complex surgeries, and severe infectious diseases, traditional medicine excels in managing chronic pain, reducing daily stress, and improving overall lifestyle. Patients should always consult qualified professionals from both fields to ensure safe, balanced, and effective treatment plans."
+                    "Modern medicine relies on advanced technology, clinical trials, and pharmaceuticals. It offers rapid treatment and precise diagnostics. However, it often treats symptoms rather than root causes and can be expensive. Traditional medicine emphasizes prevention and holistic treatment through natural remedies. It acts slowly but has fewer side effects. Both approaches have merit depending on the condition.",
+                    "Integrating both systems provides optimal patient care. Modern medicine handles emergencies and complex conditions, while traditional medicine excels in chronic pain management and preventive care. A balanced approach consulting both practitioners ensures safe, effective treatment."
                 ],
                 keyPhrases: [
-                    { en: "relies heavily on advanced technology", ru: "опирается на передовые технологии" },
-                    { en: "offers rapid results", ru: "предлагает быстрые результаты" },
-                    { en: "life-saving surgeries", ru: "спасающие жизнь операции" },
-                    { en: "focuses on symptoms", ru: "фокусируется на симптомах" },
-                    { en: "prohibitively expensive", ru: "непомерно дорого" },
-                    { en: "natural herbs and holistic approaches", ru: "натуральные травы и целостные подходы" },
-                    { en: "emphasizes prevention", ru: "делает упор на профилактику" },
-                    { en: "lacks scientific validation", ru: "не имеет научного обоснования" },
-                    { en: "acute emergencies", ru: "острые неотложные состояния" },
-                    { en: "chronic pain management", ru: "лечение хронической боли" },
-                    { en: "comprehensive patient care", ru: "комплексный уход за пациентом" }
+                    { en: "relies on advanced technology", ru: "опирается на передовые технологии" },
+                    { en: "rapid treatment", ru: "быстрое лечение" },
+                    { en: "holistic approach", ru: "комплексный подход" },
+                    { en: "preventive care", ru: "профилактическое лечение" },
+                    { en: "symptom management", ru: "лечение симптомов" },
+                    { en: "chronic conditions", ru: "хронические заболевания" }
                 ]
             },
             environment: {
-                name: "🌍 Environment & Sustainability",
+                name: "🌍 Environment & Climate",
                 taskType: 2,
                 prompts: [
                     {
                         type: "Discussion",
-                        text: "Some people think that environmental problems are too big for individuals to solve. Others believe that individuals can make a difference. Discuss both views and give your opinion."
+                        text: "Some think environmental problems are too large for individuals to solve. Others believe individuals can make a difference. Discuss both views."
                     },
                     {
                         type: "Problem",
-                        text: "Global warming is one of the biggest threats humans face. What are the causes of this phenomenon and what solutions can be implemented?"
+                        text: "What are the main causes of climate change and what solutions can be implemented?"
                     }
                 ],
                 backgroundContent: [
-                    "Environmental degradation has become one of the most pressing issues of the 21st century. Climate change, driven by greenhouse gas emissions and deforestation, poses a significant threat to global ecosystems. Rising temperatures lead to melting ice caps, extreme weather events, and rising sea levels. Furthermore, pollution from industrial activities and plastic waste contaminates our oceans and air. While governments and large corporations bear the primary responsibility for implementing large-scale reforms, individual actions also play a crucial role.",
-                    "To effectively combat these environmental challenges, a multi-faceted approach is required. Governments must enforce stricter regulations on carbon emissions and invest heavily in renewable energy sources like solar and wind power. Simultaneously, educational campaigns should raise public awareness about sustainable living. Individuals can contribute by adopting a circular economy mindset, minimizing single-use plastics, and supporting eco-friendly businesses."
+                    "Climate change is driven by greenhouse gas emissions from industry and agriculture. Rising temperatures cause extreme weather, melting ice caps, and ecosystem damage. While governments must enforce regulations on carbon emissions, individuals can contribute through sustainable choices. Recycling, reducing energy consumption, and supporting green businesses create collective impact.",
+                    "Effective climate action requires multi-level efforts. Governments invest in renewable energy, enforce environmental standards, and support green infrastructure. Businesses transition to sustainable practices. Individuals reduce carbon footprints through conscious consumption. Educational awareness accelerates cultural shifts toward environmental responsibility."
                 ],
                 keyPhrases: [
-                    { en: "environmental degradation", ru: "ухудшение окружающей среды" },
-                    { en: "greenhouse gas emissions", ru: "выбросы парниковых газов" },
-                    { en: "poses a significant threat", ru: "представляет значительную угрозу" },
-                    { en: "extreme weather events", ru: "экстремальные погодные явления" },
-                    { en: "bear the primary responsibility", ru: "нести основную ответственность" },
-                    { en: "large-scale reforms", ru: "масштабные реформы" },
-                    { en: "mitigating environmental damage", ru: "смягчение ущерба окружающей среде" },
-                    { en: "multi-faceted approach", ru: "многогранный подход" },
-                    { en: "renewable energy sources", ru: "возобновляемые источники энергии" },
-                    { en: "sustainable living", ru: "устойчивый образ жизни" }
+                    { en: "climate change", ru: "изменение климата" },
+                    { en: "greenhouse gases", ru: "парниковые газы" },
+                    { en: "renewable energy", ru: "возобновляемая энергия" },
+                    { en: "sustainable practices", ru: "устойчивые методы" },
+                    { en: "carbon footprint", ru: "углеродный след" },
+                    { en: "ecosystem damage", ru: "ущерб экосистеме" }
                 ]
             },
             crime: {
-                name: "⚖️ Law & Crime",
+                name: "⚖️ Law & Justice",
                 taskType: 2,
                 prompts: [
                     {
                         type: "Discussion",
-                        text: "Some people believe that the best way to reduce crime is to give longer prison sentences. Others believe there are better alternative ways. Discuss both views and give your opinion."
+                        text: "Some believe longer prison sentences reduce crime. Others support rehabilitation approaches. Discuss both views."
                     },
                     {
                         type: "Problem",
-                        text: "In many cities, the crime rate is increasing. What do you think are the main causes of this problem and what measures can be taken to solve it?"
+                        text: "Why is crime increasing in cities and what solutions can address this issue?"
                     }
                 ],
                 backgroundContent: [
-                    "Crime remains a significant challenge in many urban areas worldwide, prompting debates about the most effective ways to maintain law and order. Traditionally, the justice system has relied on punitive measures, such as lengthy prison sentences, to deter criminal behavior. However, many criminologists argue that this approach fails to address the root causes of crime, such as poverty, lack of education, and social inequality. Consequently, prisons often become breeding grounds for further criminal activity rather than centers for rehabilitation.",
-                    "Alternative approaches to crime reduction focus on rehabilitation and social integration. Community service, vocational training, and educational programs within prisons can equip offenders with the skills needed to reintegrate into society successfully. Furthermore, investing in early childhood education and providing support for at-risk youth can prevent criminal behavior before it starts."
+                    "Crime persists despite punitive measures. Research shows lengthy sentences don't significantly deter offenders. Root causes like poverty, lack of education, and limited opportunities drive criminal behavior. Rehabilitation programs, vocational training, and community support prove more effective long-term. Prevention through education and early intervention reduces crime rates.",
+                    "Modern justice systems combine deterrence with rehabilitation. Community service and educational programs help offenders reintegrate. Investment in youth programs, mental health services, and economic opportunities addresses underlying causes. Evidence shows comprehensive approaches reduce recidivism better than incarceration alone."
                 ],
                 keyPhrases: [
-                    { en: "maintain law and order", ru: "поддерживать закон и порядок" },
-                    { en: "punitive measures", ru: "карательные меры" },
-                    { en: "deter criminal behavior", ru: "сдерживать преступное поведение" },
-                    { en: "root causes of crime", ru: "коренные причины преступности" },
-                    { en: "social inequality", ru: "социальное неравенство" },
-                    { en: "preventive strategies", ru: "превентивные стратегии" },
-                    { en: "social integration", ru: "социальная интеграция" },
-                    { en: "vocational training", ru: "профессиональное обучение" }
+                    { en: "deterrent effect", ru: "сдерживающий эффект" },
+                    { en: "rehabilitation", ru: "реабилитация" },
+                    { en: "root causes", ru: "коренные причины" },
+                    { en: "recidivism", ru: "рецидивизм" },
+                    { en: "vocational training", ru: "профессиональное обучение" },
+                    { en: "community support", ru: "поддержка сообщества" }
                 ]
             },
             family: {
@@ -564,25 +490,76 @@
                 prompts: [
                     {
                         type: "Discussion",
-                        text: "Some people think that parents should teach children how to be good members of society. Others believe that school is the best place to learn this. Discuss both views and give your opinion."
+                        text: "Parents or schools - who should teach children about values? Discuss both perspectives."
                     },
                     {
                         type: "Agree",
-                        text: "Nowadays, many families spend less time together eating meals. To what extent do you agree or disagree that this is a negative development?"
+                        text: "Families spend less time together. Is this negative? Give your opinion."
                     }
                 ],
                 backgroundContent: [
-                    "The family unit has traditionally been the cornerstone of society, playing a vital role in shaping a child's moral compass and social skills. Parents are the first educators a child encounters, and the values instilled at home often dictate future behavior. Through daily interactions, children learn empathy, respect, and responsibility. However, in today's fast-paced world, both parents often work long hours, leaving less time for family bonding.",
-                    "Ultimately, the responsibility of raising good citizens should be a collaborative effort between home and school. While parents lay the foundational moral groundwork, schools reinforce these values through formal education and social activities. A strong partnership between parents and teachers ensures that children receive consistent messaging about right and wrong."
+                    "Family is the foundation of social development. Parents instill core values through daily interaction. Children learn respect, responsibility, and empathy at home. Schools reinforce these values through formal education. Both environments shape character. Today's fast-paced world reduces family time, affecting childhood development and social skills.",
+                    "Strong families and schools work together for optimal child development. Parents provide emotional foundation and moral grounding. Teachers develop academic skills and social awareness. Consistent values from both settings create well-rounded individuals. Modern families must prioritize quality time despite busy schedules to maintain strong bonds."
                 ],
                 keyPhrases: [
-                    { en: "family unit", ru: "ячейка общества" },
-                    { en: "cornerstone of society", ru: "краеугольный камень общества" },
-                    { en: "moral compass", ru: "моральный компас" },
-                    { en: "values instilled at home", ru: "ценности, привитые дома" },
-                    { en: "fast-paced world", ru: "быстро меняющийся мир" },
-                    { en: "collaborative effort", ru: "совместные усилия" },
-                    { en: "well-rounded individuals", ru: "всесторонне развитые личности" }
+                    { en: "moral foundation", ru: "моральная основа" },
+                    { en: "social values", ru: "социальные ценности" },
+                    { en: "family bonding", ru: "семейная связь" },
+                    { en: "childhood development", ru: "развитие ребенка" },
+                    { en: "parental guidance", ru: "родительское руководство" },
+                    { en: "well-rounded person", ru: "всесторонне развитый человек" }
+                ]
+            },
+            technology: {
+                name: "💻 Technology & Society",
+                taskType: 2,
+                prompts: [
+                    {
+                        type: "Discussion",
+                        text: "Technology connects people globally but reduces face-to-face interaction. Discuss both effects."
+                    },
+                    {
+                        type: "Problem",
+                        text: "What problems does excessive technology use cause and how can society address them?"
+                    }
+                ],
+                backgroundContent: [
+                    "Technology revolutionized communication and information access. Social media connects people across continents instantly. Remote work increases flexibility and opportunity. However, screen addiction reduces meaningful face-to-face interaction. Mental health issues, sleep problems, and social anxiety increase with technology overuse. Balance is essential for healthy development.",
+                    "Smart technology adoption requires conscious boundaries. Digital literacy education teaches responsible use. Families benefit from screen-free times and outdoor activities. Workplaces should enforce reasonable hours despite remote capabilities. Technology serves humanity best when people maintain human connections and physical health alongside digital engagement."
+                ],
+                keyPhrases: [
+                    { en: "digital transformation", ru: "цифровая трансформация" },
+                    { en: "screen addiction", ru: "зависимость от экрана" },
+                    { en: "social isolation", ru: "социальная изоляция" },
+                    { en: "digital literacy", ru: "цифровая грамотность" },
+                    { en: "mental well-being", ru: "психическое благополучие" },
+                    { en: "balanced lifestyle", ru: "сбалансированный образ жизни" }
+                ]
+            },
+            education: {
+                name: "📚 Education & Learning",
+                taskType: 2,
+                prompts: [
+                    {
+                        type: "Discussion",
+                        text: "Online vs traditional education - which is better? Discuss advantages of both."
+                    },
+                    {
+                        type: "Problem",
+                        text: "Why do students struggle with motivation and what can improve engagement?"
+                    }
+                ],
+                backgroundContent: [
+                    "Traditional education builds community and direct mentorship. Classrooms enable peer interaction and immediate feedback. Online learning offers flexibility and accessibility. Students learn at their own pace with diverse resources. Hybrid models combine benefits of both. Effective education adapts to individual learning styles and ensures comprehensive skill development.",
+                    "Motivation challenges stem from various sources. Clear learning goals, engaging content, and supportive teachers increase participation. Student autonomy and choice boost motivation. Relevance to career goals matters significantly. Assessment methods should evaluate growth beyond test scores. Quality education develops critical thinking, creativity, and collaboration skills."
+                ],
+                keyPhrases: [
+                    { en: "learning outcomes", ru: "результаты обучения" },
+                    { en: "student engagement", ru: "вовлеченность студентов" },
+                    { en: "critical thinking", ru: "критическое мышление" },
+                    { en: "collaborative learning", ru: "совместное обучение" },
+                    { en: "skill development", ru: "развитие навыков" },
+                    { en: "educational equity", ru: "образовательное равенство" }
                 ]
             },
             chartBar: {
@@ -591,21 +568,19 @@
                 prompts: [
                     {
                         type: "Report",
-                        text: "The bar chart shows the percentage of people using different modes of transport in London between 1990 and 2010. Summarize the information by selecting and reporting the main features."
+                        text: "The bar chart shows transportation usage in London (1990-2010). Summarize the main trends."
                     }
                 ],
                 visualType: "bar",
                 backgroundContent: [
-                    "The bar chart illustrates transportation usage in London over a 20-year period from 1990 to 2010. Overall, car usage remained the most popular mode of transport throughout the period, despite some fluctuations. In 1990, 45% of commuters used cars, which increased to 52% in 2000 before dropping slightly to 48% in 2010. Bus usage showed a different pattern, starting at 30% in 1990, declining to 25% in 2000, and recovering slightly to 28% by 2010. Train usage demonstrated steady growth, rising from 15% to 20% over the two decades."
+                    "London transportation data reveals significant patterns. Car usage remained dominant throughout the period despite fluctuations. In 1990, 45% used cars, increasing to 52% by 2000, then declining to 48% in 2010. Bus usage decreased from 30% to 25% to 28%. Train usage showed steady growth from 15% to 20%. Overall, cars dominated despite environmental concerns and public transport improvements."
                 ],
                 keyPhrases: [
-                    { en: "illustrates transportation usage", ru: "иллюстрирует использование транспорта" },
-                    { en: "over a 20-year period", ru: "за 20-летний период" },
-                    { en: "remained the most popular", ru: "остался самым популярным" },
-                    { en: "despite some fluctuations", ru: "несмотря на колебания" },
-                    { en: "increased to", ru: "увеличилось до" },
-                    { en: "demonstrated steady growth", ru: "продемонстрировал устойчивый рост" },
-                    { en: "throughout the period", ru: "на протяжении периода" }
+                    { en: "transportation trends", ru: "тенденции в транспорте" },
+                    { en: "usage patterns", ru: "модели использования" },
+                    { en: "steady growth", ru: "устойчивый рост" },
+                    { en: "fluctuations", ru: "колебания" },
+                    { en: "significant decline", ru: "значительное снижение" }
                 ]
             },
             chartLine: {
@@ -614,20 +589,19 @@
                 prompts: [
                     {
                         type: "Report",
-                        text: "The line graph shows the number of tourists visiting three European countries (France, Spain, Italy) from 2010 to 2020. Summarize the information."
+                        text: "The line graph shows tourist arrivals in European countries (2010-2020). Describe the trends."
                     }
                 ],
                 visualType: "line",
                 backgroundContent: [
-                    "The line graph depicts tourist arrivals in three European countries over a decade from 2010 to 2020. Overall, all three countries experienced steady growth in tourism until 2018, followed by a sharp decline in 2020, likely due to the global pandemic. France consistently attracted the highest number of tourists, starting at 80 million in 2010 and peaking at 92 million in 2018, before plummeting to 60 million in 2020."
+                    "European tourism data shows three distinct phases. From 2010-2018, all three countries experienced steady growth. France led consistently, growing from 80 to 92 million visitors. Spain showed moderate growth patterns. Italy maintained steady visitor numbers. After 2018, a sharp decline occurred in 2020, likely due to global pandemic travel restrictions. Recovery prospects depend on healthcare and economic stability."
                 ],
                 keyPhrases: [
-                    { en: "depicts tourist arrivals", ru: "изображает прибытие туристов" },
-                    { en: "over a decade", ru: "за десятилетие" },
-                    { en: "experienced steady growth", ru: "испытал устойчивый рост" },
-                    { en: "followed by a sharp decline", ru: "за которым последовало резкое падение" },
-                    { en: "consistently attracted", ru: "постоянно привлекал" },
-                    { en: "peaking at", ru: "достигая пика в" }
+                    { en: "growth trajectory", ru: "траектория роста" },
+                    { en: "peak period", ru: "период пика" },
+                    { en: "decline phase", ru: "фаза спада" },
+                    { en: "visitor numbers", ru: "количество посетителей" },
+                    { en: "recovery trends", ru: "тенденции восстановления" }
                 ]
             },
             chartPie: {
@@ -636,19 +610,19 @@
                 prompts: [
                     {
                         type: "Report",
-                        text: "The pie charts show the proportion of energy production from different sources (Coal, Natural Gas, Nuclear, Renewables) in a country in 2000 and 2020. Summarize the information."
+                        text: "The pie charts compare energy sources (2000 vs 2020). Summarize the shifts."
                     }
                 ],
                 visualType: "pie",
                 backgroundContent: [
-                    "The pie charts compare the sources of energy production in a particular country between 2000 and 2020. Overall, there was a significant shift towards renewable energy sources over the 20-year period, while coal usage declined substantially. In 2000, coal dominated energy production at 40%, followed by natural gas at 30%, nuclear power at 20%, and renewables at only 10%. By 2020, the proportion of coal had fallen to 25%, while renewable energy had increased dramatically to 25%."
+                    "Energy production underwent major transformation over 20 years. In 2000, coal dominated at 40%, followed by natural gas at 30%, nuclear at 20%, and renewables at 10%. By 2020, coal declined to 25%, natural gas remained at 30%, nuclear stayed at 20%, and renewables grew significantly to 25%. This shift reflects environmental awareness and renewable technology investments. Future projections expect renewables to increase further."
                 ],
                 keyPhrases: [
-                    { en: "compare the sources of energy production", ru: "сравнивают источники производства энергии" },
-                    { en: "significant shift towards", ru: "значительный сдвиг в сторону" },
-                    { en: "declined substantially", ru: "существенно снизился" },
-                    { en: "dominated energy production", ru: "доминировал в производстве энергии" },
-                    { en: "increased dramatically", ru: "резко увеличилось" }
+                    { en: "energy sources", ru: "источники энергии" },
+                    { en: "renewable shift", ru: "сдвиг к возобновляемым источникам" },
+                    { en: "fossil fuels", ru: "ископаемые виды топлива" },
+                    { en: "sustainability", ru: "устойчивость" },
+                    { en: "production capacity", ru: "производственная мощность" }
                 ]
             },
             chartTable: {
@@ -657,23 +631,399 @@
                 prompts: [
                     {
                         type: "Report",
-                        text: "The table shows the average monthly salaries (in USD) in five different professions in three cities (New York, London, Tokyo) in 2023. Summarize the information."
+                        text: "The table shows average salaries across professions in three cities (2023). Compare the data."
                     }
                 ],
                 visualType: "table",
                 backgroundContent: [
-                    "The table presents data on average monthly salaries across five professions in three major cities in 2023. Overall, New York offered the highest salaries across all professions, followed by London and then Tokyo. Doctors and lawyers were the highest-paid professionals in all three cities. In New York, lawyers earned the most at $9,000 per month, followed by doctors at $8,500."
+                    "Salary data reveals geographic and professional disparities. New York offers highest salaries across all professions: lawyers earn $9,000/month, doctors $8,500, engineers $7,500, teachers $4,500, nurses $5,500. London shows moderate salaries: lawyers $7,500, doctors $7,000. Tokyo offers lower salaries: lawyers $6,000, doctors $5,500. Geographic location and cost of living significantly impact compensation despite similar professional roles."
                 ],
                 keyPhrases: [
-                    { en: "presents data on average monthly salaries", ru: "представляет данные о среднемесячных зарплатах" },
-                    { en: "offered the highest salaries", ru: "предлагал самые высокие зарплаты" },
-                    { en: "highest-paid professionals", ru: "самые высокооплачиваемые специалисты" },
-                    { en: "respectively", ru: "соответственно" }
+                    { en: "salary comparison", ru: "сравнение зарплат" },
+                    { en: "geographic variation", ru: "географические различия" },
+                    { en: "professional hierarchy", ru: "профессиональная иерархия" },
+                    { en: "cost of living", ru: "стоимость жизни" },
+                    { en: "income disparities", ru: "различия в доходах" }
+                ]
+            }
+        };
+
+        const assessmentQuestions = [
+            {
+                question: "What are your main writing challenges?",
+                options: [
+                    "Grammar and sentence structure",
+                    "Vocabulary range",
+                    "Organizing ideas",
+                    "Punctuation",
+                    "Time management",
+                    "Coherence between paragraphs"
                 ]
             },
-            chartMap: {
-                name: "🗺️ Map Evolution",
-                taskType: 1,
-                prompts: [
-                    {
-                        type: "Report",
+            {
+                question: "What is your current English level?",
+                options: [
+                    "Beginner (A1-A2)",
+                    "Elementary (B1)",
+                    "Intermediate (B2)",
+                    "Upper-Intermediate (B2+)",
+                    "Advanced (C1)"
+                ]
+            }
+        ];
+
+        function initializeApp() {
+            displayAssessmentQuestion(0);
+        }
+
+        function displayAssessmentQuestion(questionIndex) {
+            const question = assessmentQuestions[questionIndex];
+            document.getElementById('questionTitle').innerHTML = `Question ${questionIndex + 1}/2: ${question.question}`;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const label = document.createElement('label');
+                label.className = 'quiz-choice';
+                label.innerHTML = `
+                    <input type="checkbox" value="${option}" onchange="toggleOption(this, ${questionIndex})">
+                    <span>${option}</span>
+                `;
+                optionsContainer.appendChild(label);
+            });
+        }
+
+        function toggleOption(checkbox, questionIndex) {
+            const selected = checkbox.parentElement;
+            if (checkbox.checked) {
+                selected.classList.add('selected');
+            } else {
+                selected.classList.remove('selected');
+            }
+        }
+
+        function proceedToNextQuestion() {
+            const checkboxes = document.querySelectorAll('#optionsContainer input:checked');
+            if (checkboxes.length < 3) {
+                alert('Please select at least 3 areas');
+                return;
+            }
+            
+            assessmentResponses = Array.from(checkboxes).map(cb => cb.value);
+            
+            if (assessmentResponses.length > 0) {
+                document.getElementById('quizContainer').classList.add('hidden');
+                document.getElementById('assessmentResult').classList.remove('hidden');
+                document.getElementById('resultMessage').textContent = `Great! You've identified your focus areas. Let's practice with targeted exercises.`;
+            }
+        }
+
+        function enterMainMenu() {
+            document.getElementById('assessmentScreen').classList.add('hidden');
+            document.getElementById('mainMenu').classList.remove('hidden');
+        }
+
+        function selectLevel(level) {
+            currentLevel = level;
+            const buttons = document.querySelectorAll('.button-level');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            updateWordCountDisplay();
+        }
+
+        function selectTaskType(taskType) {
+            currentTaskType = taskType;
+            displayTopics();
+        }
+
+        function displayTopics() {
+            const topicsContainer = document.getElementById('topicsContainer');
+            topicsContainer.innerHTML = '';
+            
+            Object.keys(topicLibrary).forEach(key => {
+                const topic = topicLibrary[key];
+                if (topic.taskType === currentTaskType) {
+                    const tile = document.createElement('div');
+                    tile.className = 'topic-tile';
+                    tile.innerHTML = topic.name;
+                    tile.onclick = () => selectTopic(key);
+                    topicsContainer.appendChild(tile);
+                }
+            });
+            
+            document.getElementById('mainMenu').classList.add('hidden');
+            document.getElementById('topicsScreen').classList.remove('hidden');
+        }
+
+        function selectTopic(topicKey) {
+            currentTopic = topicKey;
+            displayPrompts();
+        }
+
+        function displayPrompts() {
+            const topic = topicLibrary[currentTopic];
+            document.getElementById('topicTitle').textContent = topic.name;
+            const promptsContainer = document.getElementById('promptsContainer');
+            promptsContainer.innerHTML = '';
+            
+            topic.prompts.forEach((prompt, index) => {
+                const promptDiv = document.createElement('div');
+                promptDiv.className = 'prompt-item';
+                const badgeClass = `badge-${prompt.type.toLowerCase()}`;
+                promptDiv.innerHTML = `
+                    <span class="badge ${badgeClass}">${prompt.type}</span>
+                    <p>${prompt.text}</p>
+                `;
+                promptDiv.onclick = () => selectPrompt(index);
+                promptsContainer.appendChild(promptDiv);
+            });
+            
+            document.getElementById('topicsScreen').classList.add('hidden');
+            document.getElementById('promptsScreen').classList.remove('hidden');
+        }
+
+        function selectPrompt(promptIndex) {
+            currentPrompt = promptIndex;
+            prepareWritingScreen();
+        }
+
+        function prepareWritingScreen() {
+            const topic = topicLibrary[currentTopic];
+            const prompt = topic.prompts[currentPrompt];
+            
+            document.getElementById('promptDisplay').textContent = prompt.text;
+            updateWordCountDisplay();
+            
+            const preparationContent = document.getElementById('preparationContent');
+            preparationContent.innerHTML = `
+                <h2>Background Information</h2>
+                <div class="content-box">
+                    <h3>Context</h3>
+                    <p>${topic.backgroundContent[0]}</p>
+                </div>
+                <div class="content-box">
+                    <h3>Key Phrases to Use</h3>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr style="background: #f0f4ff;">
+                            <td style="padding: 10px; border: 1px solid #e5e7eb;"><strong>English</strong></td>
+                            <td style="padding: 10px; border: 1px solid #e5e7eb;"><strong>Russian</strong></td>
+                        </tr>
+                        ${topic.keyPhrases.slice(0, 5).map(phrase => `
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #e5e7eb;">${phrase.en}</td>
+                                <td style="padding: 10px; border: 1px solid #e5e7eb;">${phrase.ru}</td>
+                            </tr>
+                        `).join('')}
+                    </table>
+                </div>
+            `;
+            
+            document.getElementById('essayField').value = '';
+            document.getElementById('feedbackSection').classList.add('hidden');
+            
+            document.getElementById('promptsScreen').classList.add('hidden');
+            document.getElementById('writingScreen').classList.remove('hidden');
+        }
+
+        function updateWordCount() {
+            const essay = document.getElementById('essayField').value;
+            const wordCount = essay.trim().split(/\s+/).filter(w => w.length > 0).length;
+            document.getElementById('currentWordCount').textContent = wordCount;
+            
+            const level = DIFFICULTY_LEVELS[currentLevel];
+            const counter = document.getElementById('wordCounter');
+            if (wordCount < level.minWords) {
+                counter.classList.add('warning');
+            } else {
+                counter.classList.remove('warning');
+            }
+        }
+
+        function updateWordCountDisplay() {
+            const level = DIFFICULTY_LEVELS[currentLevel];
+            document.getElementById('minimumWords').textContent = level.minWords;
+        }
+
+        function evaluateEssay() {
+            const essay = document.getElementById('essayField').value;
+            const wordCount = essay.trim().split(/\s+/).filter(w => w.length > 0).length;
+            const level = DIFFICULTY_LEVELS[currentLevel];
+            
+            if (wordCount < level.minWords) {
+                alert(`Please write at least ${level.minWords} words for ${level.name} level.`);
+                return;
+            }
+            
+            const taskResponse = calculateEvaluation(essay, wordCount);
+            displayFeedback(taskResponse);
+        }
+
+        function calculateEvaluation(essay, wordCount) {
+            const level = DIFFICULTY_LEVELS[currentLevel];
+            
+            const coherence = calculateCoherence(essay);
+            const lexical = calculateLexicalRange(essay);
+            const grammar = calculateGrammarScore(essay);
+            const taskCompletion = calculateTaskCompletion(essay);
+            
+            const baseScore = (coherence + lexical + grammar + taskCompletion) / 4;
+            const wordBonus = Math.min((wordCount - level.minWords) / 50, 0.5);
+            const finalScore = Math.min(baseScore + wordBonus, level.maxBand);
+            
+            return {
+                finalScore: Math.round(finalScore * 10) / 10,
+                coherence: Math.round(coherence * 10) / 10,
+                lexical: Math.round(lexical * 10) / 10,
+                grammar: Math.round(grammar * 10) / 10,
+                taskCompletion: Math.round(taskCompletion * 10) / 10,
+                wordCount: wordCount
+            };
+        }
+
+        function calculateCoherence(essay) {
+            const sentences = essay.split(/[.!?]+/).filter(s => s.trim().length > 0);
+            const paragraphs = essay.split('\n\n').filter(p => p.trim().length > 0);
+            
+            const cohesiveMarkers = ['however', 'therefore', 'furthermore', 'moreover', 'additionally', 'consequently', 'in conclusion', 'on the other hand'];
+            let markerCount = 0;
+            cohesiveMarkers.forEach(marker => {
+                const regex = new RegExp(`\\b${marker}\\b`, 'gi');
+                markerCount += (essay.match(regex) || []).length;
+            });
+            
+            const score = Math.min(5 + (paragraphs.length * 0.3) + (markerCount * 0.2), 9);
+            return score;
+        }
+
+        function calculateLexicalRange(essay) {
+            const words = essay.toLowerCase().split(/\s+/).filter(w => w.match(/^[a-z]+$/));
+            const uniqueWords = new Set(words);
+            const vocabularyDiversity = uniqueWords.size / words.length;
+            
+            const advancedWords = ['utilise', 'establish', 'analyse', 'comprehensive', 'significant', 'substantial', 'remarkable', 'enhance', 'facilitate', 'implement', 'address', 'demonstrate'];
+            let advancedCount = 0;
+            advancedWords.forEach(word => {
+                const regex = new RegExp(`\\b${word}\\b`, 'gi');
+                advancedCount += (essay.match(regex) || []).length;
+            });
+            
+            const score = Math.min(4 + (vocabularyDiversity * 3) + (advancedCount * 0.1), 9);
+            return score;
+        }
+
+        function calculateGrammarScore(essay) {
+            let score = 8;
+            
+            const commonErrors = [
+                { pattern: /\b(a|an)\s+(?![aeiou])/gi, penalty: 0.5 },
+                { pattern: /\b(is|are)\s+(a|an)\s+/gi, penalty: 0.3 },
+                { pattern: /\s{2,}/g, penalty: 0.2 }
+            ];
+            
+            commonErrors.forEach(error => {
+                const matches = essay.match(error.pattern) || [];
+                score -= matches.length * error.penalty;
+            });
+            
+            score = Math.max(Math.min(score, 9), 3);
+            return score;
+        }
+
+        function calculateTaskCompletion(essay) {
+            const length = essay.length;
+            const ideas = essay.split(/[.!?]+/).length;
+            
+            const score = Math.min(5 + (ideas * 0.3) + (Math.min(length / 200, 2)), 9);
+            return score;
+        }
+
+        function displayFeedback(taskResponse) {
+            document.getElementById('bandScore').textContent = taskResponse.finalScore;
+            
+            const metricsContainer = document.getElementById('metricsContainer');
+            metricsContainer.innerHTML = `
+                <div class="metric-box">
+                    <h4>Coherence & Cohesion</h4>
+                    <div class="metric-score">${taskResponse.coherence}</div>
+                </div>
+                <div class="metric-box">
+                    <h4>Lexical Range</h4>
+                    <div class="metric-score">${taskResponse.lexical}</div>
+                </div>
+                <div class="metric-box">
+                    <h4>Grammar</h4>
+                    <div class="metric-score">${taskResponse.grammar}</div>
+                </div>
+                <div class="metric-box">
+                    <h4>Task Completion</h4>
+                    <div class="metric-score">${taskResponse.taskCompletion}</div>
+                </div>
+            `;
+            
+            const suggestions = generateSuggestions(taskResponse);
+            const suggestionsContainer = document.getElementById('suggestionsContainer');
+            suggestionsContainer.innerHTML = `
+                <h3 style="color: #1e3a8a; margin-top: 20px;">Areas to Improve</h3>
+                <ul class="suggestions-list">
+                    ${suggestions.map(s => `<li>${s}</li>`).join('')}
+                </ul>
+            `;
+            
+            document.getElementById('feedbackSection').classList.remove('hidden');
+        }
+
+        function generateSuggestions(taskResponse) {
+            const suggestions = [];
+            
+            if (taskResponse.coherence < 7) {
+                suggestions.push("Use transition words like 'however', 'therefore', 'moreover' to connect your ideas better.");
+            }
+            if (taskResponse.lexical < 7) {
+                suggestions.push("Expand your vocabulary. Try synonyms and more sophisticated expressions.");
+            }
+            if (taskResponse.grammar < 7) {
+                suggestions.push("Review your article usage (a/an/the) and subject-verb agreement.");
+            }
+            if (taskResponse.taskCompletion < 7) {
+                suggestions.push("Ensure you fully address all parts of the question with relevant examples.");
+            }
+            
+            if (suggestions.length === 0) {
+                suggestions.push("Excellent work! Continue practicing to maintain consistency.");
+            }
+            
+            return suggestions;
+        }
+
+        function returnToMenu() {
+            document.getElementById('topicsScreen').classList.add('hidden');
+            document.getElementById('mainMenu').classList.remove('hidden');
+        }
+
+        function backToTopics() {
+            document.getElementById('promptsScreen').classList.add('hidden');
+            document.getElementById('topicsScreen').classList.remove('hidden');
+        }
+
+        function backToPrompts() {
+            document.getElementById('writingScreen').classList.add('hidden');
+            document.getElementById('promptsScreen').classList.remove('hidden');
+        }
+
+        function openProgressTracker() {
+            const progressList = document.getElementById('progressList');
+            progressList.innerHTML = `
+                <div style="padding: 15px; background: #f0f4ff; border-radius: 8px;">
+                    <p>Start writing and practicing to track your progress here.</p>
+                    <p style="margin-top: 10px; color: #666;">Your performance data will be stored as you complete more tasks.</p>
+                </div>
+            `;
+            document.getElementById('mainMenu').classList.add('hidden');
+            document.getElementById('progressScreen').classList.remove('hidden');
+        }
+
+        window.onload = initializeApp;
+    </script>
+</body>
+</html>
